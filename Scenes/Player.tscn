@@ -1,0 +1,56 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Assets/Player/PlayerModel.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Entities/Player/PlayerActions.cs" type="Script" id=2]
+[ext_resource path="res://Scenes/HUD/HUD.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Weapons/LaserWeapon.tscn" type="PackedScene" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 16, 32 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "Run",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 28.3452, 5.7202 )
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 2 )
+BaseMaxHealth = 100
+BaseSpeed = 300
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+current = true
+zoom = Vector2( 0.3, 0.3 )
+
+[node name="HUDLayer" parent="." instance=ExtResource( 3 )]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 5 )
+animation = "Run"
+
+[node name="WeaponNode" parent="." instance=ExtResource( 4 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 2.38419e-07, 7.5 )
+scale = Vector2( 0.282234, -1.31114 )
+shape = SubResource( 6 )

@@ -1,0 +1,41 @@
+{
+  "Converyor": {
+    "Basic": {
+      "IronPlate": 5,
+      "CopperPlate": 5
+    },
+    "Advanced": {
+
+    }
+  },
+  "Smelter": {
+    "Basic": {
+      "IronPlate": 10,
+      "CopperPlate": 5,
+      "TinPlate": 4
+    },
+    "Advanced": {
+
+    }
+  },
+  "FuelBurningGenerator": {
+    "Basic": {
+      "IronPlate": 10,
+      "CopperPlate": 10,
+      "TinPlate": 6
+    },
+    "Advanced": {
+
+    }
+  },
+  "Drill": {
+    "Basic": {
+      "IronPlate": 15,
+      "CopperPlate": 5,
+      "TinPlate": 2
+    },
+    "Advanced": {
+
+    }
+  }
+}

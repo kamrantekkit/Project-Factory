@@ -1,0 +1,22 @@
+{
+  "IronOre": {
+    "Time": 40,
+    "Amount": 1,
+    "Output": [ "IronPlate" ]
+  },
+  "CopperOre": {
+    "Time": 40,
+    "Amount": 1,
+    "Output": [ "CopperPlate" ]
+  },
+  "SilverOre": {
+    "Time": 40,
+    "Amount": 1,
+    "Output": [ "SilverPlate" ]
+  },
+  "TinOre": {
+    "Time": 40,
+    "Amount": 1,
+    "Output": [ "TinPlate" ]
+  }
+}

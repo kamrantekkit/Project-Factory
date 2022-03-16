@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Scripts/Entities/Player/WeaponScripts/WeaponNode.cs" type="Script" id=1]
+[ext_resource path="res://Scripts/Entities/Player/WeaponScripts/LaserEmitter.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Null Asset/Null.png" type="Texture" id=3]
+[ext_resource path="res://Assets/WeaponAssets/WeaponEffects/GlowingCircle.png" type="Texture" id=4]
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 177.0
+
+[sub_resource type="CanvasItemMaterial" id=7]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.634615, 0.910256 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.592179, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+flag_disable_z = true
+spread = 30.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 120.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.2
+scale_curve = SubResource( 4 )
+color = Color( 5.78, 0, 0, 1 )
+color_ramp = SubResource( 2 )
+
+[sub_resource type="Environment" id=6]
+background_mode = 4
+glow_enabled = true
+glow_levels/1 = true
+glow_levels/4 = true
+glow_intensity = 1.0
+glow_strength = 1.04
+glow_blend_mode = 0
+glow_hdr_luminance_cap = 2.0
+glow_bicubic_upscale = true
+
+[node name="WeaponNode" type="Node2D"]
+position = Vector2( 0, -1 )
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 20, 0 )
+texture = ExtResource( 3 )
+
+[node name="EnemyFinder" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyFinder"]
+shape = SubResource( 8 )
+
+[node name="Emitter" type="RayCast2D" parent="."]
+position = Vector2( 24, 0 )
+enabled = true
+cast_to = Vector2( 150, 0 )
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="Line2D" type="Line2D" parent="Emitter"]
+points = PoolVector2Array( 0, 0, 50, 0 )
+width = 2.0
+default_color = Color( 54.24, 0, 0, 1 )
+antialiased = true
+
+[node name="Tween" type="Tween" parent="Emitter"]
+
+[node name="CollidingParticlesEmitter" type="Particles2D" parent="Emitter"]
+material = SubResource( 7 )
+position = Vector2( -20, 0 )
+emitting = false
+amount = 12
+lifetime = 0.3
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 5 )
+texture = ExtResource( 4 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Emitter"]
+environment = SubResource( 6 )
+
+[connection signal="body_entered" from="EnemyFinder" to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="EnemyFinder" to="." method="OnBodyExited"]

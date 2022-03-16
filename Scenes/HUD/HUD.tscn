@@ -1,0 +1,657 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://Scripts/HudScripts/SelectedItemHud.cs" type="Script" id=1]
+[ext_resource path="res://Scripts/HudScripts/HUDManager.cs" type="Script" id=2]
+[ext_resource path="res://Scripts/HudScripts/CostHud/ItemCostHandler.cs" type="Script" id=3]
+[ext_resource path="res://Assets/ItemResources/ProcessedItems/IronPlate.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/HudScripts/PowerOverview.cs" type="Script" id=5]
+[ext_resource path="res://Assets/HUD/EnergyBarStages/EnergyBarParts2.png" type="Texture" id=6]
+[ext_resource path="res://Assets/HUD/HUDMainTheme.tres" type="Theme" id=7]
+[ext_resource path="res://Assets/ItemResources/ProcessedItems/CopperPlate.png" type="Texture" id=8]
+[ext_resource path="res://Assets/ItemResources/ProcessedItems/SilverPlate.png" type="Texture" id=9]
+[ext_resource path="res://Assets/ItemResources/ProcessedItems/TinPlate.png" type="Texture" id=10]
+[ext_resource path="res://Assets/HUD/EnergyBarStages/EnergyBarParts1.png" type="Texture" id=11]
+[ext_resource path="res://Scripts/HudScripts/StoredItemsComponent/HUDStoredItem.cs" type="Script" id=12]
+[ext_resource path="res://Assets/HUD/EnergyBarStages/EnergyBarParts0.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Machine/Drills/Basic/BasicDrill0.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Machine/Logistics/ConveryorStraight/Basic/ConveryorStraight0.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Machine/Smelter/Basic/BasicSmelter0.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Machine/Generator/FuelBurning/Basic/BasicGenerator0.png" type="Texture" id=17]
+[ext_resource path="res://Scripts/HudScripts/Hotbar/HotbarButtonHandler.cs" type="Script" id=18]
+[ext_resource path="res://Scripts/HudScripts/DetectMouse.cs" type="Script" id=19]
+[ext_resource path="res://Scripts/HudScripts/CostHud/CostHUDManager.cs" type="Script" id=20]
+[ext_resource path="res://Scripts/HudScripts/HealthOverview.cs" type="Script" id=21]
+[ext_resource path="res://Scripts/HudScripts/LevelOverview.cs" type="Script" id=22]
+[ext_resource path="res://Scripts/HudScripts/TechGUI/TechGUI.cs" type="Script" id=23]
+[ext_resource path="res://Scripts/HudScripts/TechGUI/TechGUIUpgrade.cs" type="Script" id=24]
+[ext_resource path="res://Scripts/HudScripts/TechGUI/TechNodeManager.cs" type="Script" id=25]
+[ext_resource path="res://Scripts/HudScripts/TechGUI/TechAmount.cs" type="Script" id=26]
+[ext_resource path="res://Scripts/HudScripts/ScoreOverview.cs" type="Script" id=27]
+[ext_resource path="res://Scripts/HudScripts/WaveTimer.cs" type="Script" id=28]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.882353, 0.203922, 0.921569, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+bg_color = Color( 0.247059, 0.247059, 0.247059, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[node name="HUDLayer" type="CanvasLayer"]
+
+[node name="HUDManager" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = 2.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource( 7 )
+script = ExtResource( 2 )
+
+[node name="StoredItems" type="TabContainer" parent="HUDManager"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -277.0
+margin_top = -102.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 100, 200 )
+
+[node name="Basic" type="Tabs" parent="HUDManager/StoredItems"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="GridContainer" type="GridContainer" parent="HUDManager/StoredItems/Basic"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUDManager/StoredItems/Basic/GridContainer"]
+margin_right = 230.0
+margin_bottom = 152.0
+
+[node name="IronPlate" type="HBoxContainer" parent="HUDManager/StoredItems/Basic/GridContainer/VBoxContainer" groups=["HUDStoredItems"]]
+margin_right = 230.0
+margin_bottom = 35.0
+script = ExtResource( 12 )
+
+[node name="IronPlate" type="TextureRect" parent="HUDManager/StoredItems/Basic/GridContainer/VBoxContainer/IronPlate"]
+margin_right = 32.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="Amount" type="Label" parent="HUDManager/StoredItems/Basic/GridContainer/VBoxContainer/IronPlate"]
+margin_left = 36.0
+margin_right = 188.0
+margin_bottom = 35.0
+text = "IronPlate: 0"
+
+[node name="CopperPlate" type="HBoxContainer" parent="HUDManager/StoredItems/Basic/GridContainer/VBoxContainer" groups=["HUDStoredItems"]]
+margin_top = 39.0
+margin_right = 230.0
+margin_bottom = 74.0
+script = ExtResource( 12 )
+
+[node name="CopperPlate" type="TextureRect" parent="HUDManager/StoredItems/Basic/GridContainer/VBoxContainer/CopperPlate"]
+margin_right = 32.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="Amount" type="Label" parent="HUDManager/StoredItems/Basic/GridContainer/VBoxContainer/CopperPlate"]
+margin_left = 36.0
+margin_right = 230.0
+margin_bottom = 35.0
+text = "CopperPlate: 0"
+
+[node name="SilverPlate" type="HBoxContainer" parent="HUDManager/StoredItems/Basic/GridContainer/VBoxContainer" groups=["HUDStoredItems"]]
+margin_top = 78.0
+margin_right = 230.0
+margin_bottom = 113.0
+script = ExtResource( 12 )
+
+[node name="SilverPlate" type="TextureRect" parent="HUDManager/StoredItems/Basic/GridContainer/VBoxContainer/SilverPlate"]
+margin_right = 32.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Amount" type="Label" parent="HUDManager/StoredItems/Basic/GridContainer/VBoxContainer/SilverPlate"]
+margin_left = 36.0
+margin_right = 210.0
+margin_bottom = 35.0
+text = "SilverPlate: 0"
+
+[node name="TinPlate" type="HBoxContainer" parent="HUDManager/StoredItems/Basic/GridContainer/VBoxContainer" groups=["HUDStoredItems"]]
+margin_top = 117.0
+margin_right = 230.0
+margin_bottom = 152.0
+script = ExtResource( 12 )
+
+[node name="TinPlate" type="TextureRect" parent="HUDManager/StoredItems/Basic/GridContainer/VBoxContainer/TinPlate"]
+margin_right = 32.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+
+[node name="Amount" type="Label" parent="HUDManager/StoredItems/Basic/GridContainer/VBoxContainer/TinPlate"]
+margin_left = 36.0
+margin_right = 177.0
+margin_bottom = 35.0
+text = "TinPlate: 0"
+
+[node name="EnergyContainer" type="GridContainer" parent="HUDManager"]
+margin_right = 104.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="HUDManager/EnergyContainer"]
+margin_right = 200.0
+margin_bottom = 100.0
+
+[node name="EnergyBar" type="TextureProgress" parent="HUDManager/EnergyContainer/CenterContainer"]
+margin_right = 200.0
+margin_bottom = 100.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 200, 100 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_under = ExtResource( 13 )
+texture_over = ExtResource( 11 )
+texture_progress = ExtResource( 6 )
+nine_patch_stretch = true
+
+[node name="PowerOverview" type="Label" parent="HUDManager/EnergyContainer"]
+margin_left = 204.0
+margin_top = 32.0
+margin_right = 204.0
+margin_bottom = 67.0
+uppercase = true
+script = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="HUDManager/EnergyContainer"]
+margin_left = 208.0
+margin_top = 32.0
+margin_right = 208.0
+margin_bottom = 67.0
+
+[node name="HealthContainer" type="GridContainer" parent="HUDManager"]
+margin_top = 104.0
+margin_right = 208.0
+margin_bottom = 204.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="Health" type="Label" parent="HUDManager/HealthContainer"]
+margin_bottom = 35.0
+uppercase = true
+script = ExtResource( 21 )
+
+[node name="Hotbar" type="TabContainer" parent="HUDManager"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -400.0
+margin_top = -100.0
+margin_right = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 800, 100 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 19 )
+
+[node name="Basic" type="Tabs" parent="HUDManager/Hotbar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="HUDManager/Hotbar/Basic"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Basic" type="GridContainer" parent="HUDManager/Hotbar/Basic/CenterContainer"]
+margin_left = 262.0
+margin_right = 530.0
+margin_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/vseparation = 10
+columns = 9
+
+[node name="Converyor" type="TextureButton" parent="HUDManager/Hotbar/Basic/CenterContainer/Basic"]
+margin_right = 64.0
+margin_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 64, 64 )
+mouse_filter = 1
+input_pass_on_modal_close_click = false
+texture_normal = ExtResource( 15 )
+expand = true
+stretch_mode = 5
+script = ExtResource( 18 )
+
+[node name="FuelBurningGenerator" type="TextureButton" parent="HUDManager/Hotbar/Basic/CenterContainer/Basic"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 64, 64 )
+mouse_filter = 1
+texture_normal = ExtResource( 17 )
+expand = true
+stretch_mode = 5
+script = ExtResource( 18 )
+
+[node name="Drill" type="TextureButton" parent="HUDManager/Hotbar/Basic/CenterContainer/Basic"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 64, 64 )
+mouse_filter = 1
+input_pass_on_modal_close_click = false
+texture_normal = ExtResource( 14 )
+expand = true
+stretch_mode = 5
+script = ExtResource( 18 )
+
+[node name="Smelter" type="TextureButton" parent="HUDManager/Hotbar/Basic/CenterContainer/Basic"]
+margin_left = 204.0
+margin_right = 268.0
+margin_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 64, 64 )
+mouse_filter = 1
+input_pass_on_modal_close_click = false
+texture_normal = ExtResource( 16 )
+expand = true
+stretch_mode = 5
+script = ExtResource( 18 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUDManager"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 626.0
+margin_top = -227.0
+margin_right = -624.0
+margin_bottom = -88.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="HUDManager/VBoxContainer"]
+margin_right = 150.0
+margin_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 150, 100 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUDManager/VBoxContainer/CenterContainer"]
+margin_left = 12.0
+margin_top = 26.0
+margin_right = 137.0
+margin_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HUDManager/VBoxContainer/CenterContainer/HBoxContainer"]
+margin_top = 6.0
+margin_right = 36.0
+margin_bottom = 41.0
+text = "<Q"
+
+[node name="TextureRect" type="TextureRect" parent="HUDManager/VBoxContainer/CenterContainer/HBoxContainer"]
+margin_left = 40.0
+margin_right = 88.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+expand = true
+stretch_mode = 6
+
+[node name="Label2" type="Label" parent="HUDManager/VBoxContainer/CenterContainer/HBoxContainer"]
+margin_left = 92.0
+margin_top = 6.0
+margin_right = 125.0
+margin_bottom = 41.0
+text = "E>"
+
+[node name="SelectedItemHud" type="Label" parent="HUDManager/VBoxContainer"]
+margin_top = 104.0
+margin_right = 150.0
+margin_bottom = 139.0
+align = 1
+valign = 1
+script = ExtResource( 1 )
+
+[node name="SelectedItemCost" type="VBoxContainer" parent="HUDManager"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -76.0
+margin_right = 230.0
+margin_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource( 20 )
+
+[node name="CostLabel" type="Label" parent="HUDManager/SelectedItemCost"]
+margin_right = 230.0
+margin_bottom = 35.0
+text = "Cost"
+
+[node name="IronPlate" type="HBoxContainer" parent="HUDManager/SelectedItemCost" groups=["CostTileHUD"]]
+visible = false
+margin_top = 39.0
+margin_right = 230.0
+margin_bottom = 74.0
+script = ExtResource( 3 )
+
+[node name="IronPlate" type="TextureRect" parent="HUDManager/SelectedItemCost/IronPlate"]
+margin_right = 32.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="Amount" type="Label" parent="HUDManager/SelectedItemCost/IronPlate"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 35.0
+text = ": 0"
+
+[node name="CopperPlate" type="HBoxContainer" parent="HUDManager/SelectedItemCost" groups=["CostTileHUD"]]
+visible = false
+margin_top = 39.0
+margin_right = 230.0
+margin_bottom = 74.0
+script = ExtResource( 3 )
+
+[node name="CopperPlate" type="TextureRect" parent="HUDManager/SelectedItemCost/CopperPlate"]
+margin_right = 32.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="Amount" type="Label" parent="HUDManager/SelectedItemCost/CopperPlate"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 35.0
+text = ": 0"
+
+[node name="SilverPlate" type="HBoxContainer" parent="HUDManager/SelectedItemCost" groups=["CostTileHUD"]]
+visible = false
+margin_top = 39.0
+margin_right = 230.0
+margin_bottom = 74.0
+script = ExtResource( 3 )
+
+[node name="SilverPlate" type="TextureRect" parent="HUDManager/SelectedItemCost/SilverPlate"]
+margin_right = 32.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Amount" type="Label" parent="HUDManager/SelectedItemCost/SilverPlate"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 35.0
+text = ": 0"
+
+[node name="TinPlate" type="HBoxContainer" parent="HUDManager/SelectedItemCost" groups=["CostTileHUD"]]
+visible = false
+margin_top = 39.0
+margin_right = 230.0
+margin_bottom = 74.0
+script = ExtResource( 3 )
+
+[node name="TinPlate" type="TextureRect" parent="HUDManager/SelectedItemCost/TinPlate"]
+margin_right = 32.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+
+[node name="Amount" type="Label" parent="HUDManager/SelectedItemCost/TinPlate"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 35.0
+text = ": 0"
+
+[node name="CurrentLevelContainer" type="MarginContainer" parent="HUDManager"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -250.0
+margin_right = 250.0
+margin_bottom = 91.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_top = 4
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HUDManager/CurrentLevelContainer"]
+margin_top = 4.0
+margin_right = 500.0
+margin_bottom = 91.0
+
+[node name="ExprienceLevelBar" type="ProgressBar" parent="HUDManager/CurrentLevelContainer/VBoxContainer2"]
+margin_right = 500.0
+margin_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 500, 48 )
+size_flags_horizontal = 3
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+max_value = 25.0
+step = 1.0
+percent_visible = false
+
+[node name="LevelOverview" type="Label" parent="HUDManager/CurrentLevelContainer/VBoxContainer2"]
+margin_top = 52.0
+margin_right = 500.0
+margin_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 2
+align = 1
+valign = 1
+script = ExtResource( 22 )
+
+[node name="TechUpgrades" type="TabContainer" parent="HUDManager"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -150.0
+margin_right = 250.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 390, 300 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tab_align = 0
+script = ExtResource( 23 )
+
+[node name="Player Upgrades" type="Tabs" parent="HUDManager/TechUpgrades"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="CenterContainer" type="CenterContainer" parent="HUDManager/TechUpgrades/Player Upgrades"]
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PlayerTechNodes" type="VBoxContainer" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer"]
+margin_right = 496.0
+margin_bottom = 125.0
+custom_constants/separation = 10
+
+[node name="Damage" type="HBoxContainer" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes" groups=["TechUpgradesHUD"]]
+margin_right = 496.0
+margin_bottom = 35.0
+custom_constants/separation = 10
+script = ExtResource( 25 )
+
+[node name="Level" type="Label" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes/Damage"]
+margin_right = 210.0
+margin_bottom = 35.0
+text = "Damage: +0 Lv1"
+
+[node name="Button" type="Button" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes/Damage"]
+margin_left = 220.0
+margin_right = 331.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 0, 32 )
+text = "Upgrade"
+script = ExtResource( 24 )
+
+[node name="Label" type="Label" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes/Damage"]
+margin_left = 341.0
+margin_right = 429.0
+margin_bottom = 35.0
+text = "2 Tech"
+
+[node name="Health" type="HBoxContainer" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes" groups=["TechUpgradesHUD"]]
+margin_top = 45.0
+margin_right = 496.0
+margin_bottom = 80.0
+custom_constants/separation = 10
+script = ExtResource( 25 )
+
+[node name="Level" type="Label" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes/Health"]
+margin_right = 190.0
+margin_bottom = 35.0
+text = "Health: +0 Lv1"
+
+[node name="Button" type="Button" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes/Health"]
+margin_left = 200.0
+margin_right = 311.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 0, 32 )
+text = "Upgrade"
+script = ExtResource( 24 )
+
+[node name="Label" type="Label" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes/Health"]
+margin_left = 321.0
+margin_right = 409.0
+margin_bottom = 35.0
+text = "1 Tech"
+
+[node name="Speed" type="HBoxContainer" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes" groups=["TechUpgradesHUD"]]
+margin_top = 90.0
+margin_right = 496.0
+margin_bottom = 125.0
+custom_constants/separation = 10
+script = ExtResource( 25 )
+
+[node name="Level" type="Label" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes/Speed"]
+margin_right = 277.0
+margin_bottom = 35.0
+text = "Speed Boost: +0 Lv 1"
+
+[node name="Button" type="Button" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes/Speed"]
+margin_left = 287.0
+margin_right = 398.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 0, 32 )
+text = "Upgrade"
+script = ExtResource( 24 )
+
+[node name="Label" type="Label" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes/Speed"]
+margin_left = 408.0
+margin_right = 496.0
+margin_bottom = 35.0
+text = "1 Tech"
+
+[node name="TechAmount" type="Label" parent="HUDManager/TechUpgrades/Player Upgrades"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -35.0
+margin_right = 40.0
+text = "Tech Remaining: 0"
+script = ExtResource( 26 )
+
+[node name="WaveTimer" type="Label" parent="HUDManager"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -126.0
+margin_bottom = 73.0
+grow_horizontal = 0
+text = "Next Wave in"
+align = 1
+script = ExtResource( 28 )
+
+[node name="ScoreOverview" type="Label" parent="HUDManager"]
+anchor_left = 0.001
+anchor_top = 0.278
+anchor_right = 0.001
+anchor_bottom = 0.278
+margin_left = 0.6
+margin_top = -17.4
+margin_right = 126.6
+margin_bottom = 17.6
+grow_horizontal = 0
+text = "Score: "
+script = ExtResource( 27 )

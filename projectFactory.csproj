@@ -1,0 +1,13 @@
+<Project Sdk="Godot.NET.Sdk/3.3.0">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="GameProperties\Recipes\TileRecipes.json" />
+    <Content Include="GameProperties\Recipes\SmelterRecipes.json" />
+    <Content Include="GameProperties\Recipes\BurnableFuels.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scripts\Buildable\Machines\Smelter\" />
+  </ItemGroup>
+</Project>
