@@ -544,12 +544,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PlayerTechNodes" type="VBoxContainer" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer"]
-margin_right = 496.0
+margin_right = 429.0
 margin_bottom = 125.0
 custom_constants/separation = 10
 
 [node name="Damage" type="HBoxContainer" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes" groups=["TechUpgradesHUD"]]
-margin_right = 496.0
+margin_right = 429.0
 margin_bottom = 35.0
 custom_constants/separation = 10
 script = ExtResource( 25 )
@@ -575,7 +575,7 @@ text = "2 Tech"
 
 [node name="Health" type="HBoxContainer" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes" groups=["TechUpgradesHUD"]]
 margin_top = 45.0
-margin_right = 496.0
+margin_right = 429.0
 margin_bottom = 80.0
 custom_constants/separation = 10
 script = ExtResource( 25 )
@@ -601,27 +601,27 @@ text = "1 Tech"
 
 [node name="Speed" type="HBoxContainer" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes" groups=["TechUpgradesHUD"]]
 margin_top = 90.0
-margin_right = 496.0
+margin_right = 429.0
 margin_bottom = 125.0
 custom_constants/separation = 10
 script = ExtResource( 25 )
 
 [node name="Level" type="Label" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes/Speed"]
-margin_right = 277.0
+margin_right = 184.0
 margin_bottom = 35.0
-text = "Speed Boost: +0 Lv 1"
+text = "Speed: +0 Lv1"
 
 [node name="Button" type="Button" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes/Speed"]
-margin_left = 287.0
-margin_right = 398.0
+margin_left = 194.0
+margin_right = 305.0
 margin_bottom = 35.0
 rect_min_size = Vector2( 0, 32 )
 text = "Upgrade"
 script = ExtResource( 24 )
 
 [node name="Label" type="Label" parent="HUDManager/TechUpgrades/Player Upgrades/CenterContainer/PlayerTechNodes/Speed"]
-margin_left = 408.0
-margin_right = 496.0
+margin_left = 315.0
+margin_right = 403.0
 margin_bottom = 35.0
 text = "1 Tech"
 

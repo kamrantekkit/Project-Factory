@@ -12,7 +12,7 @@ public static class SceneResourceLoader
     public static void LoadBuildableTiles()
     {
         //Create Main Base Structure
-        CreateMainBaseItem("res://Assets/Machine/MainBase/MainBase.tres");
+        CreateMainBase("res://Assets/Machine/MainBase/MainBase.tres");
 
         //Create Basic Converyor
         CreateConveryorTile(TileTypes.Converyor, TierType.Basic, true, "res://Assets/Machine/Logistics/ConveryorStraight/Basic/ConveryorStraightBasic.tres", ConveryorDirectionType.Straight);
@@ -88,7 +88,7 @@ public static class SceneResourceLoader
 
 
     //Generate a MainBase Tile
-    private static void CreateMainBaseItem(string textureResourcePath)
+    private static void CreateMainBase(string textureResourcePath)
     {
         AnimatedTexture animatedTexture = (AnimatedTexture)ResourceLoader.Load(textureResourcePath);
         MainCore generatedTile = new MainCore(TileTypes.MainBase, false, LoadedTilesAmount, TierType.Basic, animatedTexture);

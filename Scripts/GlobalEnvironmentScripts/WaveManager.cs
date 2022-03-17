@@ -96,7 +96,7 @@ public class WaveManager : Node2D
 
     public override void _PhysicsProcess(float delta)
     {
-        CurrentUpdateTime += delta;
+/*        CurrentUpdateTime += delta;
         if (!WaveIsActive) CurrentWaveTime -= delta;
         if (CurrentWaveTime <= 0 && !WaveIsActive)
         {
@@ -111,7 +111,7 @@ public class WaveManager : Node2D
             {
                 SpawnEnemy();
             }
-        }
+        }*/
     }
 
     private void StartWave()
@@ -130,6 +130,7 @@ public class WaveManager : Node2D
             if (CurrentWave % WaveMileStone == 0)
             {
                 UpdateEnemiesModifiers();
+                SpawnAmount += EnemyIncrementAmount;
             }
         }
     }
@@ -138,7 +139,7 @@ public class WaveManager : Node2D
     {
         EnemyDamageModifier += EnemyDamageModifierIncrement;
         EnemyHPModifier += EnemyHPModifierIncrement;
-        EnemySpeedModifier += EnemySpeedModifier;
+        EnemySpeedModifier += EnemySpeedModifierIncrement;
     }
     private void SpawnEnemy()
     {

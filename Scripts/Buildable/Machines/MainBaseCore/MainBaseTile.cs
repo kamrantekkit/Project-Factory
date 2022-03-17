@@ -10,6 +10,7 @@ public class MainBaseTile : BaseMachineMultiTile
     {
         base._Ready();
         SceneNode.MainBase = this;
+        GD.Print(TileLocation);
 
         InternalGenerator.CurrentPowerOutput = 5;
         PowerGridNetwork.ConnectedGenerators.Add(InternalGenerator);

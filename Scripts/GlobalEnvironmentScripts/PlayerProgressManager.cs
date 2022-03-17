@@ -80,8 +80,8 @@ public class PlayerProgressManager : Node2D
     private void SetupTechNodeTree()
     {
         CreateTechNode("Damage", 2, 4);
-        CreateTechNode("Health", 2, 8);
-        CreateTechNode("Speed", 2, 1);
+        CreateTechNode("Health", 1, 8);
+        CreateTechNode("Speed", 1, 2);
 
     }
     private void CreateTechNode(string name, int TechForUpgrade, float modifierIncrement)

@@ -33,9 +33,10 @@ animations = [ {
 extents = Vector2( 28.3452, 5.7202 )
 
 [node name="Player" type="KinematicBody2D"]
+scale = Vector2( 1.17783, 1.01821 )
 script = ExtResource( 2 )
 BaseMaxHealth = 100
-BaseSpeed = 300
+BaseSpeed = 40
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false

@@ -49,27 +49,28 @@ namespace buildLayer
         //For handling multi tile objects
         public void SpawnTile(Vector2 location, Rotations currentRotation, int tile, BaseBuildable itemSelected, int width, int height)
         {
-            if (PlacedTiles.ContainsKey(location))
-            {
-                GD.Print("tile already exist in location");
-                return;
-            }
+            
+
             switch (currentRotation)
             {
                 case Rotations.Up:
+                    if (CheckIfIsOverlapping(location, width, height, 1, 1)) return;
                     Vector2 locationOffset = new Vector2(location.x, location.y - height + 1);
                     SetCellv(locationOffset, tile);
                     SpawnTileNode(itemSelected, location, currentRotation, width, height, 1, 1);
                     break;
                 case Rotations.Right:
+                    if (CheckIfIsOverlapping(location, height, width, 1, 1)) return;
                     SetCellv(location, tile, true, false, true);
                     SpawnTileNode(itemSelected, location, currentRotation, height, width, 1, 1);
                     break;
                 case Rotations.Down:
+                    if (CheckIfIsOverlapping(location, width, height, -1, 1)) return;
                     SetCellv(location, tile, true, true);
                     SpawnTileNode(itemSelected, location, currentRotation, width, height, -1, 1);
                     break;
                 case Rotations.Left:
+                    if (CheckIfIsOverlapping(location, height, width, -1, -1)) return;
                     SetCellv(new Vector2(location.x - width, location.y), tile, true, true, true);
                     SpawnTileNode(itemSelected, location, currentRotation, height, width, -1, -1);
                     break;
@@ -92,11 +93,13 @@ namespace buildLayer
 
         public void SpawnTileNode(BaseBuildable itemSelected, Vector2 location, Rotations rotation, int width, int height, int tileOffSetY, int tileOffSetX)
         {
+
             BaseMachineMultiTile spawnedTileNode = (BaseMachineMultiTile)itemSelected.TileNode.Instance();
             spawnedTileNode.Transform = new Transform2D(0, MapToWorld(location));
             spawnedTileNode.TileName = itemSelected.TileName;
             spawnedTileNode.TileRotation = rotation;
             spawnedTileNode.Tier = itemSelected.Tier;
+            spawnedTileNode.TileLocation = location;
             spawnedTileNode.AssociatedItem = itemSelected;
             for (int currentHeightRow = 0; currentHeightRow < height; currentHeightRow++)
             {
@@ -173,6 +176,22 @@ namespace buildLayer
             MainCore MainBaseItem = (MainCore)SceneNode.BuildTiles.Find(tile => tile.TileName == TileTypes.MainBase);
             SpawnTile(MainBaseSpawnLocation, Rotations.Up, MainBaseItem.ItemID, MainBaseItem, MainBaseItem.Width, MainBaseItem.Height);
 
+        }
+
+        private bool CheckIfIsOverlapping(Vector2 location, int width, int height, int tileOffSetY, int tileOffSetX)
+        {
+
+            for (int currentHeightRow = 0; currentHeightRow < height; currentHeightRow++)
+            {
+                for (int currentWidthRow = 0; currentWidthRow < width; currentWidthRow++)
+                {
+                    if (PlacedTiles.ContainsKey(new Vector2(location.x + (currentWidthRow * tileOffSetX), location.y + (currentHeightRow * (-tileOffSetY)))))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
     }
