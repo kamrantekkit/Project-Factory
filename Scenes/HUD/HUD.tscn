@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Scripts/HudScripts/SelectedItemHud.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/HudScripts/HUDManager.cs" type="Script" id=2]
@@ -28,6 +28,9 @@
 [ext_resource path="res://Scripts/HudScripts/TechGUI/TechAmount.cs" type="Script" id=26]
 [ext_resource path="res://Scripts/HudScripts/ScoreOverview.cs" type="Script" id=27]
 [ext_resource path="res://Scripts/HudScripts/WaveTimer.cs" type="Script" id=28]
+[ext_resource path="res://Assets/Fonts/ARIBLK.TTF" type="DynamicFontData" id=29]
+[ext_resource path="res://Scripts/MainMenu/ReturnToMenu.cs" type="Script" id=30]
+[ext_resource path="res://Scripts/HudScripts/GameOver.cs" type="Script" id=31]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.882353, 0.203922, 0.921569, 1 )
@@ -47,6 +50,10 @@ expand_margin_left = 2.0
 expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
+
+[sub_resource type="DynamicFont" id=3]
+size = 48
+font_data = ExtResource( 29 )
 
 [node name="HUDLayer" type="CanvasLayer"]
 
@@ -171,8 +178,8 @@ margin_bottom = 35.0
 text = "TinPlate: 0"
 
 [node name="EnergyContainer" type="GridContainer" parent="HUDManager"]
-margin_right = 104.0
-margin_bottom = 50.0
+margin_right = 208.0
+margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
@@ -321,7 +328,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 626.0
-margin_top = -227.0
+margin_top = -231.0
 margin_right = -624.0
 margin_bottom = -88.0
 grow_horizontal = 2
@@ -388,7 +395,7 @@ script = ExtResource( 20 )
 [node name="CostLabel" type="Label" parent="HUDManager/SelectedItemCost"]
 margin_right = 230.0
 margin_bottom = 35.0
-text = "Cost"
+text = "Cost To Build"
 
 [node name="IronPlate" type="HBoxContainer" parent="HUDManager/SelectedItemCost" groups=["CostTileHUD"]]
 visible = false
@@ -655,3 +662,76 @@ margin_bottom = 17.6
 grow_horizontal = 0
 text = "Score: "
 script = ExtResource( 27 )
+
+[node name="GameOver" type="Panel" parent="HUDManager"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -400.0
+margin_top = -300.0
+margin_right = 400.0
+margin_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 800, 600 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 31 )
+
+[node name="MarginContainer" type="MarginContainer" parent="HUDManager/GameOver"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -221.0
+margin_right = 221.0
+margin_bottom = 139.0
+grow_horizontal = 2
+
+[node name="WavesSurvived" type="Label" parent="HUDManager/GameOver/MarginContainer"]
+margin_right = 442.0
+margin_bottom = 139.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 3 )
+align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUDManager/GameOver"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/separation = 20
+
+[node name="Score" type="Label" parent="HUDManager/GameOver/VBoxContainer"]
+margin_right = 203.0
+margin_bottom = 35.0
+text = "Score: 0"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUDManager/GameOver/VBoxContainer"]
+margin_top = 55.0
+margin_right = 203.0
+margin_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Return" type="Button" parent="HUDManager/GameOver/VBoxContainer/HBoxContainer"]
+margin_right = 203.0
+margin_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Return to Menu"
+script = ExtResource( 30 )
+
+[connection signal="pressed" from="HUDManager/GameOver/VBoxContainer/HBoxContainer/Return" to="HUDManager/GameOver/VBoxContainer/HBoxContainer/Return" method="OnPressed"]

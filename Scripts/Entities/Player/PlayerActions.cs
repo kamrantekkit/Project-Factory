@@ -27,6 +27,7 @@ public class PlayerActions : BaseEntity
     float TimeRemaingForStartRegen = 0;
     float CurrentTickForRegen = 0;
     bool StartRegen = false;
+    bool PlayerHasDied = false;
 
     public override void _Ready()
     {
@@ -52,7 +53,7 @@ public class PlayerActions : BaseEntity
 
     public override void _Input(InputEvent @event)
     {
-        if (IsGUIOpen) return;
+        if (IsGUIOpen || PlayerHasDied) return;
 
         if (Input.IsActionJustPressed("rotate"))
         {
@@ -130,11 +131,19 @@ public class PlayerActions : BaseEntity
 
     public override void TakeDamage(int HitPoints)
     {
+        if (PlayerHasDied) return;
         TimeRemaingForStartRegen = 0;
         CurrentTickForRegen = 0;
         StartRegen = false;
+       
         UpdateHealthHUD();
         base.TakeDamage(HitPoints);
+
+        if (Health <= 0)
+        {
+            PlayerHasDied = true;
+            HUDManager.OnGameOver();
+        }
     }
 
     public void UpdateTechNodeModifiors()

@@ -10,7 +10,7 @@ public class PlayerProgressManager : Node2D
 
     private float EXPMultiplier;
     private int LevelCapStep = 15;
-    private int TechPoints = 100;
+    private int TechPoints = 0;
 
     public override void _Ready()
     {

@@ -6,7 +6,7 @@ public class WaveManager : Node2D
     PackedScene BasicEnemyPackScene;
     SceneNode MainSceneNode;
 
-    private int CurrentWave = 1;
+    public int CurrentWave { get; protected set; } = 0;
 
     private int WaveStartTime;
     private float CurrentWaveTime;
@@ -17,6 +17,7 @@ public class WaveManager : Node2D
     private int SpawnAmount;
     private int EnemyIncrementAmount;
     private List<BasicEnemy> SpawnedEnemies = new List<BasicEnemy>();
+    private bool HasAllEnemiesSpawned = false;
 
     private int UpdateEveryTimer = 1;
     private float CurrentUpdateTime = 0;
@@ -32,7 +33,9 @@ public class WaveManager : Node2D
     private float EnemyDamageModifierIncrement;
     public override void _Ready()
     {
+        SetPhysicsProcess(false);
         MainSceneNode = GetParent() as SceneNode;
+        MainSceneNode.Connect("LoadIsComplete", this, nameof(StartWaveTimer));
         BasicEnemyPackScene = (PackedScene)ResourceLoader.Load("res://Scenes/Enemies/BasicEnemy.tscn");
         switch(MainSceneNode.WorldDifficulty)
         {
@@ -94,24 +97,34 @@ public class WaveManager : Node2D
         CurrentWaveTime = WaveStartTime;
     }
 
+    private void StartWaveTimer()
+    {
+        SetPhysicsProcess(true);
+    }
+
     public override void _PhysicsProcess(float delta)
     {
-/*        CurrentUpdateTime += delta;
+        CurrentUpdateTime += delta;
         if (!WaveIsActive) CurrentWaveTime -= delta;
         if (CurrentWaveTime <= 0 && !WaveIsActive)
         {
             StartWave();
         }
 
-        if (CurrentUpdateTime >= UpdateEveryTimer)
+        if (CurrentUpdateTime >= UpdateEveryTimer && !HasAllEnemiesSpawned)
         {
+            if (SpawnedEnemies.Count == SpawnAmount)
+            {
+                HasAllEnemiesSpawned = true;
+                return;
+            }
             HUDManager.WaveTimerHUD.UpdateTime((int)CurrentWaveTime);
             CurrentUpdateTime = 0;
             if (WaveIsActive)
             {
                 SpawnEnemy();
             }
-        }*/
+        }
     }
 
     private void StartWave()
@@ -125,8 +138,10 @@ public class WaveManager : Node2D
         SpawnedEnemies.Remove(basicEnemy);
         if (SpawnedEnemies.Count == 0)
         {
+            HasAllEnemiesSpawned = false;
             WaveIsActive = false;
             CurrentWaveTime = WaveStartTime;
+
             if (CurrentWave % WaveMileStone == 0)
             {
                 UpdateEnemiesModifiers();

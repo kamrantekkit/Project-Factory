@@ -11,9 +11,13 @@ config_version=4
 [application]
 
 config/name="projectFactory"
-run/main_scene="res://Scenes/testscene.tscn"
+run/main_scene="res://Scenes/MainMenu/MainMenuSelection.tscn"
 boot_splash/fullsize=false
 config/icon="res://icon.png"
+
+[autoload]
+
+AudioPlayerMenu="*res://Scenes/MainMenu/AudioPlayerMenu.tscn"
 
 [display]
 

@@ -1,0 +1,386 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Assets/Fonts/ARIBLK.TTF" type="DynamicFontData" id=1]
+[ext_resource path="res://Scripts/MainMenu/ReturnToMenu.cs" type="Script" id=2]
+[ext_resource path="res://Assets/MainMenu/MainMenuTheme.tres" type="Theme" id=3]
+[ext_resource path="res://Assets/Player/PlayerAnimatedTexture.tres" type="Texture" id=4]
+[ext_resource path="res://Assets/MainMenu/HelpAssets/TilePlace.png" type="Texture" id=5]
+[ext_resource path="res://Assets/MainMenu/HelpAssets/TileRotation.png" type="Texture" id=6]
+[ext_resource path="res://Assets/MainMenu/InformationText.tres" type="DynamicFont" id=7]
+[ext_resource path="res://Assets/MainMenu/HelpAssets/Combat.png" type="Texture" id=8]
+[ext_resource path="res://Assets/MainMenu/HelpAssets/LevelUp.png" type="Texture" id=9]
+[ext_resource path="res://Assets/MainMenu/HelpAssets/Production.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Machine/Generator/FuelBurning/Basic/BasicGenerator.tres" type="Texture" id=11]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 1 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -139.5
+margin_top = -52.0
+margin_right = 139.5
+grow_horizontal = 2
+grow_vertical = 0
+custom_constants/margin_bottom = 50
+
+[node name="Button" type="Button" parent="MarginContainer"]
+margin_right = 279.0
+margin_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 0
+custom_fonts/font = SubResource( 1 )
+text = "Return to Menu"
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 14.0
+grow_horizontal = 2
+theme = ExtResource( 3 )
+text = "Game Basics"
+
+[node name="Basic Movement" type="MarginContainer" parent="."]
+margin_left = 74.0
+margin_top = 93.0
+margin_right = 284.0
+margin_bottom = 546.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Basic Movement"]
+margin_right = 210.0
+margin_bottom = 453.0
+custom_constants/separation = 20
+
+[node name="Label3" type="Label" parent="Basic Movement/VBoxContainer"]
+margin_right = 210.0
+margin_bottom = 67.0
+text = "To Move"
+
+[node name="Label" type="Label" parent="Basic Movement/VBoxContainer"]
+margin_top = 87.0
+margin_right = 210.0
+margin_bottom = 154.0
+text = "W"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Basic Movement/VBoxContainer"]
+margin_top = 174.0
+margin_right = 210.0
+margin_bottom = 366.0
+custom_constants/separation = 20
+
+[node name="Label" type="Label" parent="Basic Movement/VBoxContainer/HBoxContainer"]
+margin_top = 62.0
+margin_right = 34.0
+margin_bottom = 129.0
+text = "S"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="Basic Movement/VBoxContainer/HBoxContainer"]
+margin_left = 54.0
+margin_right = 150.0
+margin_bottom = 192.0
+texture = ExtResource( 4 )
+
+[node name="Label2" type="Label" parent="Basic Movement/VBoxContainer/HBoxContainer"]
+margin_left = 170.0
+margin_top = 62.0
+margin_right = 207.0
+margin_bottom = 129.0
+text = "D"
+align = 1
+
+[node name="Label2" type="Label" parent="Basic Movement/VBoxContainer"]
+margin_top = 386.0
+margin_right = 210.0
+margin_bottom = 453.0
+text = "S"
+align = 1
+
+[node name="Build System" type="MarginContainer" parent="."]
+margin_left = 59.0
+margin_top = 392.0
+margin_right = 475.0
+margin_bottom = 845.0
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Build System"]
+margin_right = 698.0
+margin_bottom = 525.0
+custom_constants/separation = 20
+
+[node name="Label3" type="Label" parent="Build System/VBoxContainer"]
+margin_right = 698.0
+margin_bottom = 67.0
+text = "Building System"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Build System/VBoxContainer"]
+margin_top = 87.0
+margin_right = 698.0
+margin_bottom = 525.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Build System/VBoxContainer/HBoxContainer"]
+margin_right = 200.0
+margin_bottom = 438.0
+
+[node name="TextureRect" type="TextureRect" parent="Build System/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 200.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+texture = ExtResource( 5 )
+stretch_mode = 6
+
+[node name="TextureRect2" type="TextureRect" parent="Build System/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 204.0
+margin_right = 200.0
+margin_bottom = 404.0
+rect_min_size = Vector2( 200, 200 )
+texture = ExtResource( 6 )
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Build System/VBoxContainer/HBoxContainer"]
+margin_left = 204.0
+margin_right = 698.0
+margin_bottom = 438.0
+
+[node name="Label" type="Label" parent="Build System/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 494.0
+margin_bottom = 438.0
+custom_fonts/font = SubResource( 2 )
+text = "Left Click: 
+To Build your selected
+tile on your mouse
+Right Click:
+To destroy the tile on 
+your mouse
+Press R: To change rotation
+of Some Tiles. You can view
+Rotation Next to your hotbar"
+
+[node name="Game Objective" type="MarginContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -145.0
+margin_top = 107.0
+margin_right = 442.0
+margin_bottom = 560.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Game Objective"]
+margin_right = 587.0
+margin_bottom = 453.0
+custom_constants/separation = 20
+
+[node name="Label3" type="Label" parent="Game Objective/VBoxContainer"]
+margin_right = 587.0
+margin_bottom = 67.0
+text = "Game Objective"
+align = 1
+
+[node name="Label2" type="Label" parent="Game Objective/VBoxContainer"]
+margin_top = 87.0
+margin_right = 587.0
+margin_bottom = 249.0
+custom_fonts/font = ExtResource( 7 )
+text = "- Collect resources to earn points
+  And Exp to level an unlock tect
+- Survive as long as possible from
+  of enemies
+- Use tech to purhcase upgrades"
+
+[node name="Combat" type="MarginContainer" parent="."]
+margin_left = 248.0
+margin_top = 97.0
+margin_right = 708.0
+margin_bottom = 550.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Combat"]
+margin_right = 460.0
+margin_bottom = 453.0
+custom_constants/separation = 20
+
+[node name="Label3" type="Label" parent="Combat/VBoxContainer"]
+margin_right = 460.0
+margin_bottom = 67.0
+text = "Combat"
+align = 1
+
+[node name="Label" type="Label" parent="Combat/VBoxContainer"]
+margin_top = 87.0
+margin_right = 460.0
+margin_bottom = 150.0
+custom_fonts/font = ExtResource( 7 )
+text = "Press space to fire a laser
+At Nearby Enemies"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="Combat/VBoxContainer"]
+margin_top = 170.0
+margin_right = 460.0
+margin_bottom = 370.0
+rect_min_size = Vector2( 460, 200 )
+texture = ExtResource( 8 )
+stretch_mode = 6
+
+[node name="Tech Upgrades" type="MarginContainer" parent="."]
+margin_left = 998.0
+margin_top = 67.0
+margin_right = 1458.0
+margin_bottom = 616.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tech Upgrades"]
+margin_right = 460.0
+margin_bottom = 549.0
+custom_constants/separation = 20
+
+[node name="Label3" type="Label" parent="Tech Upgrades/VBoxContainer"]
+margin_right = 460.0
+margin_bottom = 67.0
+text = "Tech Upgrades"
+align = 1
+
+[node name="Label" type="Label" parent="Tech Upgrades/VBoxContainer"]
+margin_top = 87.0
+margin_right = 460.0
+margin_bottom = 249.0
+custom_fonts/font = ExtResource( 7 )
+text = "Press T toggle the tech 
+upgrade GUI
+You can upgrade Techs 
+using Tech points you get
+from Leveling up"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="Tech Upgrades/VBoxContainer"]
+margin_top = 269.0
+margin_right = 460.0
+margin_bottom = 469.0
+rect_min_size = Vector2( 460, 200 )
+texture = ExtResource( 9 )
+stretch_mode = 6
+
+[node name="Power System" type="MarginContainer" parent="."]
+margin_left = 429.0
+margin_top = 382.0
+margin_right = 1037.0
+margin_bottom = 931.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Power System"]
+margin_right = 608.0
+margin_bottom = 549.0
+custom_constants/separation = 20
+
+[node name="Label3" type="Label" parent="Power System/VBoxContainer"]
+margin_right = 608.0
+margin_bottom = 67.0
+text = "Power System"
+align = 1
+
+[node name="Label" type="Label" parent="Power System/VBoxContainer"]
+margin_top = 87.0
+margin_right = 608.0
+margin_bottom = 183.0
+custom_fonts/font = ExtResource( 7 )
+text = "Machines require power to operate
+Keep an eye on the top left,
+Build Generators"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="Power System/VBoxContainer"]
+margin_top = 203.0
+margin_right = 608.0
+margin_bottom = 403.0
+rect_min_size = Vector2( 460, 200 )
+texture = ExtResource( 11 )
+stretch_mode = 6
+
+[node name="Build Examples" type="MarginContainer" parent="."]
+margin_left = 890.0
+margin_top = 361.0
+margin_right = 1548.0
+margin_bottom = 1011.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Build Examples"]
+margin_right = 658.0
+margin_bottom = 650.0
+custom_constants/separation = 20
+
+[node name="Label3" type="Label" parent="Build Examples/VBoxContainer"]
+margin_right = 658.0
+margin_bottom = 67.0
+text = "Production"
+align = 1
+
+[node name="Label" type="Label" parent="Build Examples/VBoxContainer"]
+margin_top = 87.0
+margin_right = 658.0
+margin_bottom = 216.0
+custom_fonts/font = ExtResource( 7 )
+text = "To collect resources you need use
+machines to create production lines
+to produce resource and return them 
+back to your base"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="Build Examples/VBoxContainer"]
+margin_top = 236.0
+margin_right = 658.0
+margin_bottom = 586.0
+rect_min_size = Vector2( 460, 350 )
+texture = ExtResource( 10 )
+stretch_mode = 6
+
+[connection signal="button_down" from="MarginContainer/Button" to="MarginContainer/Button" method="OnPressed"]

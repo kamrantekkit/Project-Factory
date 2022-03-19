@@ -29,11 +29,16 @@ public class MinerTile : BaseMachine
     private void CheckOre()
     {
         string groundTile = EnvLayerManager.GetTileName(TileLocation);
+        if (!SceneNode.ResourceItems.ContainsKey(groundTile))
+        {
+            OutputItem = null;
+        }
         OutputItem = SceneNode.ResourceItems[groundTile];
     }
 
     public override void On_Timer_Timeout()
     {
+        if (OutputItem == null) return;
         CurrentTimeForOperation++;
 
         if (CurrentTimeForOperation >= MaxTimeForOperation && !PowerGridNetwork.IsOverloaded)
